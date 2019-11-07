@@ -1,21 +1,76 @@
 <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Population</th>
-        <th scope="col">Diameter</th>
-        <th scope="col">Terrain</th>
-        <th scope="col">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      
-      
-    </tbody>
-  </table>
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Population</th>
+      <th scope="col">Diameter</th>
+      <th scope="col">Terrain</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let planet of planets">
+      <th scope="row">{{planet.name}}</th>
+      <td>{{planet.population}}</td>
+      <td>{{planet.diameter}}</td>
+      <td>{{planet.terrain}}</td>
+      <td>
+        <button class="btn btn-xs btn-primary" (click)="openModal(details,planet.url)">Details</button>
+      </td>
+    </tr>
+    <div class="align-items-end" *ngIf="planets?.length > 0">
+      <pagination [itemsPerPage]="totalPerPage" [totalItems]="totalOfItens" [maxSize]=10
+        (pageChanged)="changePage($event)"></pagination>
+    </div>
+  </tbody>
+
+</table>
+
+<ng-template #details>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4>Details</h4>
+    </div>
+    <div class="modal-body">
+      <div class="form-group d-flex">
+        <div class="col-md-4">
+          <label for="planetName">Name</label>
+          <input type="text" id="planetName" class="form-control" [value]="planetSelected.name" disabled>
+        </div>
+        <div class="col-md-4">
+          <label for="planetTerrain">Terrain</label>
+          <input type="text" id="planetTerrain" class="form-control" [value]="planetSelected.terrain" disabled>
+        </div>
+        <div class="col-md-4">
+          <label for="planetPopulation">Population</label>
+          <input type="text" id="planetPopulation" class="form-control" [value]="planetSelected.population" disabled>
+        </div>
+      </div>
+
+      <div class="form-group d-flex">
+        <div class="col-md-4">
+          <label for="planetDiameter">Diameter</label>
+          <input type="text" id="planetDiameter" class="form-control" [value]="planetSelected.diameter" disabled>
+        </div>
+        <div class="col-md-4">
+          <label for="planetRotationPeriod">Rotation period(days)</label>
+          <input type="text" id="planetRotationPeriod" class="form-control" [value]="planetSelected.rotation_period"
+            disabled>
+        </div>
+        <div class="col-md-4">
+          <label for="Movies">Movies that appears</label>
+          <div>
+            <ul>
+              <li *ngFor="let movie of planetSelected.movies">{{movie.title}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="pull-right">
+      <button class="btn btn-md btn-primary" (click)="closeModal()">Close</button>
+    </div>
+  </div>
+</ng-template>

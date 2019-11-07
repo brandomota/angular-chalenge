@@ -4,7 +4,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './shared/components/home/home.component';
 import { PlanetsComponent } from './modules/components/planets/planets.component';
-import '../assets/styles';
+import { PlanetService } from './shared/services/planet.service';
+import { HttpClientModule } from '@angular/common/http'; 
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ModalModule } from 'ngx-bootstrap';
+import { MovieService } from './shared/services/movie.service';
 
 
 @NgModule({
@@ -15,9 +19,15 @@ import '../assets/styles';
     ],
     imports: [
         BrowserModule,
-        AppRoutingModule
+        AppRoutingModule,
+        HttpClientModule,
+        PaginationModule.forRoot(),
+        ModalModule.forRoot()
     ],
-    providers: [],
+    providers: [
+        PlanetService,
+        MovieService
+    ],
     bootstrap: [
         AppComponent
     ]

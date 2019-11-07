@@ -30,12 +30,20 @@ export class PlanetsComponent implements OnInit {
         this.loadPlanets();
     }
 
-    private loadPlanets(page: number = 1) {
-        this.planetService.list(page).subscribe((response) => {
-            this.actualPage = page;
-            this.planets = response.results;
-            this.totalOfItens = response.count;
-        });
+    private loadPlanets(page: number = 1, url:string='') {
+        if(url.length === 0) {
+            this.planetService.list(page).subscribe((response) => {
+                this.actualPage = page;
+                this.planets = response.results;
+                this.totalOfItens = response.count;
+            });
+        } else {
+            this.planetService.loadUrl(url).subscribe((response) => {
+                this.actualPage = page;
+                this.planets = response.results;
+                this.totalOfItens = response.count;
+            });
+        }
     }
 
     private getMoviesName(urlMovies: string[]) {
@@ -63,5 +71,9 @@ export class PlanetsComponent implements OnInit {
 
     public closeModal() {
         this.modalInstance.hide();
+    }
+
+    public search(word:string) {
+
     }
 }

@@ -9,7 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ModalModule } from 'ngx-bootstrap';
 import { MovieService } from './shared/services/movie.service';
-
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -19,10 +20,13 @@ import { MovieService } from './shared/services/movie.service';
     ],
     imports: [
         BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
         AppRoutingModule,
         HttpClientModule,
         PaginationModule.forRoot(),
-        ModalModule.forRoot()
+        ModalModule.forRoot(),
+        LoadingBarHttpClientModule,
     ],
     providers: [
         PlanetService,

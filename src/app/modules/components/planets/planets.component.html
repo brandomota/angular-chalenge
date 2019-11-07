@@ -1,3 +1,12 @@
+<div class="form-group d-flex">
+  <div class="col-md-4"></div>
+  <div class="col-md-8 d-flex pull-right">
+    <input type="text" class="form-control" id="inputSearch" placeholder="Search..." [(ngModel)]="search">
+    <button class="btn bt-xs btn-primary" (click)="searchByName(search)">
+      <i class="fab fa-search"></i>
+    </button>
+  </div>
+</div>
 <table class="table table-striped">
   <thead>
     <tr>

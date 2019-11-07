@@ -1,0 +1,93 @@
+<div class="form-group d-flex">
+        <div class="col-md-4">
+          <a routerLink="/">
+            <button class="btn btn-md btn-primary" action>
+                <i class="fas fa-arrow-left"></i>
+                Menu
+              </button>
+          </a>
+        </div>
+        <div class="col-md-8 d-flex pull-right">
+          <input type="text" class="form-control" id="inputSearch" placeholder="Search..." [(ngModel)]="search">
+          <button class="btn bt-xs btn-primary" (click)="searchByName(search)">
+              <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Episode</th>
+            <th scope="col">Release Date</th>
+            <th scope="col">Director</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+            <div class="lds-dual-ring spin-loading pull-right" *ngIf="isLoading && movies.length === 0"></div>
+          <tr *ngFor="let movie of movies">
+            <th scope="row">{{movie.title}}</th>
+            <td>{{movie.episode_id}}</td>
+            <td>{{movie.release_date}}</td>
+            <td>{{movie.director}}</td>
+            <td>
+              <button class="btn btn-xs btn-primary" (click)="openModal(details,movie.url)">Details</button>
+            </td>
+          </tr>
+          <div class="align-items-end" *ngIf="movies?.length > 0">
+            <pagination [itemsPerPage]="totalPerPage" [totalItems]="totalOfItens" [maxSize]=10
+              (pageChanged)="changePage($event)"></pagination>
+          </div>
+        </tbody>
+      
+      </table>
+      
+      <ng-template #details>
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4>Details</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group d-flex">
+              <div class="col-md-4">
+                <label for="movieTitle">Title</label>
+                <input type="text" id="movieTitle" class="form-control" [value]="movieSelected.title" disabled>
+              </div>
+              <div class="col-md-4">
+                <label for="MovieEpisode">Episode Number</label>
+                <input type="text" id="MovieEpisode" class="form-control" [value]="movieSelected.episode_id" disabled>
+              </div>
+              <div class="col-md-4">
+                <label for="movieReleaseDate">Release Date</label>
+                <input type="text" id="movieReleaseDate" class="form-control" [value]="movieSelected.release_date" disabled>
+              </div>
+            </div>
+      
+            <div class="form-group d-flex">
+              <div class="col-md-4">
+                <label for="movieDirector">Director</label>
+                <input type="text" id="movieDirector" class="form-control" [value]="movieSelected.director" disabled>
+              </div>
+              <div class="col-md-4">
+                <label for="movieProducer">Producer(s)</label>
+                <input type="text" id="movieProducer" class="form-control" [value]="movieSelected.producer"
+                  disabled>
+              </div>
+              <div class="col-md-4">
+                <label for="Planets">Planets that appears</label>
+                <div>
+                  <ul>
+                    <li *ngFor="let planet of movieSelected.planets">{{planet.name}}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="pull-right">
+            <button class="btn btn-md btn-primary" (click)="closeModal()">Close</button>
+          </div>
+        </div>
+      </ng-template>

@@ -11,12 +11,14 @@ import { ModalModule } from 'ngx-bootstrap';
 import { MovieService } from './shared/services/movie.service';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MoviesComponent } from './modules/components/movies/movies.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
-        PlanetsComponent
+        PlanetsComponent,
+        MoviesComponent
     ],
     imports: [
         BrowserModule,

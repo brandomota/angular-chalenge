@@ -3,3 +3,33 @@
 .modal-content {
     border: none !important;
 }
+
+lds-dual-ring {
+    display: inline-block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+  }
+  .lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 46px;
+    height: 46px;
+    margin: 1px;
+    border-radius: 50%;
+    border: 5px solid rgb(105, 149, 231);
+    border-color: rgb(105, 149, 231) transparent rgb(105, 149, 231) transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+.spin-loading {
+    margin-left: 263%;
+}

@@ -18,27 +18,32 @@ export class PlanetsComponent implements OnInit {
     public actualPage = 1;
     public totalOfItens = this.planets.length;
     public planetSelected: Planet;
+    public search:string = '';
+    public isLoading:boolean = false;
     private modalInstance:BsModalRef;
 
     constructor(
         private planetService: PlanetService, 
         private modalService: BsModalService,
-        private movieService: MovieService
+        private movieService: MovieService,
         ) { }
 
     ngOnInit() {
         this.loadPlanets();
     }
 
-    private loadPlanets(page: number = 1, url:string='') {
-        if(url.length === 0) {
+    private loadPlanets(page: number = 1) {
+        this.isLoading = true;
+        if(this.search.length === 0) {
             this.planetService.list(page).subscribe((response) => {
+                this.isLoading = false;
                 this.actualPage = page;
                 this.planets = response.results;
                 this.totalOfItens = response.count;
             });
         } else {
-            this.planetService.loadUrl(url).subscribe((response) => {
+            this.planetService.search(this.search,page).subscribe((response) => {
+                this.isLoading = false;
                 this.actualPage = page;
                 this.planets = response.results;
                 this.totalOfItens = response.count;
@@ -51,7 +56,7 @@ export class PlanetsComponent implements OnInit {
 
         urlMovies.forEach(url => {
             this.movieService.loadUrl(url).subscribe((response:Movie) => {
-                allMovies.push(response)
+                allMovies.push(response);
             });
         });
         return allMovies;
@@ -64,7 +69,7 @@ export class PlanetsComponent implements OnInit {
     public openModal(template: TemplateRef<any>, url: string) {
         this.planetService.loadUrl(url).subscribe((response) => {
             this.planetSelected = response;
-            this.planetSelected.movies = this.getMoviesName(response.films)
+            this.planetSelected.movies = this.getMoviesName(response.films);
             this.modalInstance = this.modalService.show(template, { class: 'modal-lg' });
         });
     }
@@ -73,7 +78,13 @@ export class PlanetsComponent implements OnInit {
         this.modalInstance.hide();
     }
 
-    public search(word:string) {
-
+    public searchByName(word:string) {
+        this.isLoading = true;
+        this.planetService.search(word).subscribe((response) => {
+            this.isLoading = false;
+            this.planets = response.results;
+            this.actualPage = 1;
+            this.totalOfItens = response.count;
+        });
     }
 }

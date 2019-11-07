@@ -27,7 +27,12 @@ export class BaseService<T> {
         return this.http.get<T>(`${url}`);
     }
 
-    public search(word: string): Observable<any> {
-        return this.http.get<any>(`${this.base_url}?search=${word}`)
+    public search(word: string, page:number = 1): Observable<any> {
+        if(page === 1) {
+            return this.http.get<any>(`${this.base_url}?search=${word}`);
+
+        } else {
+            return this.http.get<any>(`${this.base_url}?search=${word}&page=${page}`);
+        }
     }
 }

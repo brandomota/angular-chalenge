@@ -14,7 +14,7 @@
           </button>
         </div>
       </div>
-      <table class="table table-striped">
+      <table class="table table-bordered table-shadow table-striped ml-2 table-list-itens">
         <thead>
           <tr>
             <th scope="col">Name</th>
@@ -52,26 +52,26 @@
             <div class="form-group d-flex">
               <div class="col-md-4">
                 <label for="starshipName">Name</label>
-                <input type="text" id="starshipName" class="form-control" [value]="starshipSelected.name" disabled>
+                <input type="text" id="starshipName" class="form-control input-modal-starship-detail" [value]="starshipSelected.name" disabled>
               </div>
               <div class="col-md-4">
                 <label for="starshipModel">Model</label>
-                <input type="text" id="starshipModel" class="form-control" [value]="starshipSelected.model" disabled>
+                <input type="text" id="starshipModel" class="form-control input-modal-starship-detail" [value]="starshipSelected.model" disabled>
               </div>
               <div class="col-md-4">
                 <label for="starshipClass">Class</label>
-                <input type="text" id="starshipClass" class="form-control" [value]="starshipSelected.starship_class" disabled>
+                <input type="text" id="starshipClass" class="form-control input-modal-starship-detail" [value]="starshipSelected.starship_class" disabled>
               </div>
             </div>
       
             <div class="form-group d-flex">
               <div class="col-md-4">
                 <label for="starshipManufacturer">Manufacturer</label>
-                <input type="text" id="starshipManufacturer" class="form-control" [value]="starshipSelected.manufacturer" disabled>
+                <input type="text" id="starshipManufacturer" class="form-control input-modal-starship-detail" [value]="starshipSelected.manufacturer" disabled>
               </div>
               <div class="col-md-4">
                 <label for="starshipCost">Cost(credits)</label>
-                <input type="text" id="starshipCost" class="form-control" [value]="starshipSelected.cost_in_credits"
+                <input type="text" id="starshipCost" class="form-control input-modal-starship-detail" [value]="starshipSelected.cost_in_credits"
                   disabled>
               </div>
               <div class="col-md-4">

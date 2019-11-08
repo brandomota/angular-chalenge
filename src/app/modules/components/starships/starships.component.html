@@ -1,0 +1,93 @@
+<div class="form-group d-flex">
+        <div class="col-md-4">
+          <a routerLink="/">
+            <button class="btn btn-md btn-primary" action>
+                <i class="fas fa-arrow-left"></i>
+                Menu
+              </button>
+          </a>
+        </div>
+        <div class="col-md-8 d-flex pull-right">
+          <input type="text" class="form-control" id="inputSearch" placeholder="Search..." [(ngModel)]="search">
+          <button class="btn bt-xs btn-primary" (click)="searchByName(search)">
+              <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Model</th>
+            <th scope="col">Class</th>
+            <th scope="col">Cost(credits)</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+            <div class="lds-dual-ring spin-loading pull-right" *ngIf="isLoading && starships.length === 0"></div>
+          <tr *ngFor="let starship of starships">
+            <th scope="row">{{starship.name}}</th>
+            <td>{{starship.model}}</td>
+            <td>{{starship.starship_class}}</td>
+            <td>{{starship.cost_in_credits}}</td>
+            <td>
+              <button class="btn btn-xs btn-primary" (click)="openModal(details,starship.url)">Details</button>
+            </td>
+          </tr>
+          <div class="align-items-end" *ngIf="starships?.length > 0">
+            <pagination [itemsPerPage]="totalPerPage" [totalItems]="totalOfItens" [maxSize]=10
+              (pageChanged)="changePage($event)"></pagination>
+          </div>
+        </tbody>
+      
+      </table>
+      
+      <ng-template #details>
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4>Details</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group d-flex">
+              <div class="col-md-4">
+                <label for="starshipName">Name</label>
+                <input type="text" id="starshipName" class="form-control" [value]="starshipSelected.name" disabled>
+              </div>
+              <div class="col-md-4">
+                <label for="starshipModel">Model</label>
+                <input type="text" id="starshipModel" class="form-control" [value]="starshipSelected.model" disabled>
+              </div>
+              <div class="col-md-4">
+                <label for="starshipClass">Class</label>
+                <input type="text" id="starshipClass" class="form-control" [value]="starshipSelected.starship_class" disabled>
+              </div>
+            </div>
+      
+            <div class="form-group d-flex">
+              <div class="col-md-4">
+                <label for="starshipManufacturer">Manufacturer</label>
+                <input type="text" id="starshipManufacturer" class="form-control" [value]="starshipSelected.manufacturer" disabled>
+              </div>
+              <div class="col-md-4">
+                <label for="starshipCost">Cost(credits)</label>
+                <input type="text" id="starshipCost" class="form-control" [value]="starshipSelected.cost_in_credits"
+                  disabled>
+              </div>
+              <div class="col-md-4">
+                <label for="Movies">Movies that appears</label>
+                <div>
+                  <ul>
+                    <li *ngFor="let movie of starshipSelected.movies">{{movie.title}}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="pull-right">
+            <button class="btn btn-md btn-primary" (click)="closeModal()">Close</button>
+          </div>
+        </div>
+      </ng-template>

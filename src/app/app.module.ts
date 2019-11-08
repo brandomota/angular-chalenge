@@ -12,13 +12,16 @@ import { MovieService } from './shared/services/movie.service';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MoviesComponent } from './modules/components/movies/movies.component';
+import { StarshipService } from './shared/services/starship.service';
+import { StarshipsComponent } from './modules/components/starships/starships.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
         PlanetsComponent,
-        MoviesComponent
+        MoviesComponent,
+        StarshipsComponent
     ],
     imports: [
         BrowserModule,
@@ -32,7 +35,8 @@ import { MoviesComponent } from './modules/components/movies/movies.component';
     ],
     providers: [
         PlanetService,
-        MovieService
+        MovieService,
+        StarshipService
     ],
     bootstrap: [
         AppComponent

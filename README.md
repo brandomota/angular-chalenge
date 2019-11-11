@@ -8,4 +8,4 @@ Projeto teste utilizando API [star wars api](https://swapi.co/)
 - Faça o clone do projeto;
 - Instale as dependências do projeto: `npm install`
 - Execute o projeto com o comando: `npm run build:dev`;
-- Para buildar o projeto para produção, execute: `npm run build`.
+- Para buildar o projeto para produção, execute: `npm run build:prod`.
